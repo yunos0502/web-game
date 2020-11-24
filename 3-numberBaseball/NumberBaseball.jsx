@@ -26,9 +26,11 @@ class NumberBaseball extends Component {
     e.preventDefault();
 
     if (value === answer.join('')) {
-      this.setState({
-        result: '홈런!',
-        tries: [...tries, { try: value, result: '홈런!' }],
+      this.setState((prevState) => {
+        return {
+          result: '홈런!',
+          tries: [...prevState.tries, { try: value, result: '홈런!' }],
+        };
       });
 
       alert('게임을 다시 시작합니다!');
@@ -63,14 +65,16 @@ class NumberBaseball extends Component {
             ball += 1;
           }
         }
-        this.setState({
-          tries: [
-            ...tries,
-            {
-              try: value,
-              result: `${strike} 스트라이크, ${ball} 볼입니다!`,
-            },
-          ],
+        this.setState((prevState) => {
+          return {
+            tries: [
+              ...prevState.tries,
+              {
+                try: value,
+                result: `${strike} 스트라이크, ${ball} 볼입니다!`,
+              },
+            ],
+          };
         });
       }
     }
