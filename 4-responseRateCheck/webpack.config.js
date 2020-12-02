@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
-  name: 'numberBaseball setting',
+  name: 'ResponseCheck setting',
   mode: 'development',
   devtool: 'eval',
   resolve: {
