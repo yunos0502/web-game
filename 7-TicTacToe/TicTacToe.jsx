@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useCallback } from 'react';
+import React, { useEffect, useReducer, useCallback, memo } from 'react';
 import Table from './Table';
 
 const initialState = {
@@ -63,7 +63,7 @@ const reducer = (state, action) => {
   }
 };
 
-const TicTacToe = () => {
+const TicTacToe = memo(() => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { tableData, winner, turn, recentCell } = state;
   // const [winner, setWinner] = useState('');
@@ -125,6 +125,8 @@ const TicTacToe = () => {
         });
       });
       if (all) {
+        dispatch({ type: SET_WINNER, winner: null });
+        dispatch({ type: RESET_GAME });
       } else {
         dispatch({ type: CHANGE_TURN });
       }
@@ -137,6 +139,6 @@ const TicTacToe = () => {
       {winner && <div>{winner}님의 승리</div>}
     </>
   );
-};
+});
 
 export default TicTacToe;
