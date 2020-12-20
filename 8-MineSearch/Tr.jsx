@@ -10,7 +10,7 @@ const Tr = memo(({ rowIndex }) => {
       {tableData[0] &&
         Array(tableData[0].length)
           .fill()
-          .map((td, i) => <Td rowIndex={rowIndex} cellIndex={i} />)}
+          .map((td, i) => <Td key={i} rowIndex={rowIndex} cellIndex={i} />)}
     </tr>
   );
 });

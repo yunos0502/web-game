@@ -10,7 +10,7 @@ const Table = memo(() => {
       {Array(tableData.length)
         .fill()
         .map((tr, i) => (
-          <Tr rowIndex={i} />
+          <Tr key={i} rowIndex={i} />
         ))}
     </table>
   );
