@@ -39,7 +39,7 @@ const getTdStyle = (code) => {
 };
 
 const getTdText = (code) => {
-  // console.log('getTdtext');
+  console.log('getTdtext');
   switch (code) {
     case CODE.NORMAL:
       return '';
@@ -62,7 +62,6 @@ const Td = memo(({ rowIndex, cellIndex }) => {
   const { tableData, dispatch, halted } = useContext(TableContext);
 
   const onClickTd = useCallback(() => {
-    console.log(halted);
     if (halted) {
       return;
     }
@@ -80,7 +79,7 @@ const Td = memo(({ rowIndex, cellIndex }) => {
         dispatch({ type: CLICK_MINE, row: rowIndex, cell: cellIndex });
         return;
       default:
-        return code || '';
+        return;
     }
   }, [tableData[rowIndex][cellIndex], halted]);
 
@@ -110,7 +109,7 @@ const Td = memo(({ rowIndex, cellIndex }) => {
     [tableData[rowIndex][cellIndex], halted]
   );
 
-  // console.log('td rendered');
+  console.log('td rendered');
 
   return (
     <RealTd
@@ -119,10 +118,20 @@ const Td = memo(({ rowIndex, cellIndex }) => {
       data={tableData[rowIndex][cellIndex]}
     />
   );
+  // return useMemo(
+  //   () => (
+  //     <RealTd
+  //       onClickTd={onClickTd}
+  //       onRightClickTd={onRightClickTd}
+  //       data={tableData[rowIndex][cellIndex]}
+  //     />
+  //   ),
+  //   [tableData[rowIndex][cellIndex]]
+  // );
 });
 
 const RealTd = memo(({ onClickTd, onRightClickTd, data }) => {
-  // console.log('real td rendered');
+  console.log('real td rendered');
   return (
     <td
       style={getTdStyle(data)}
