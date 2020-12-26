@@ -49,6 +49,7 @@ module.exports = {
     publicPath: '/dist/', // 가상 경로
   },
   devServer: {
+    historyApiFallback: true,
     publicPath: '/dist/',
     hot: true,
   },
