@@ -1,56 +1,51 @@
 const path = require('path');
-const webpack = require('webpack');
-const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
-  name: 'MineSearch setting',
+  name: 'games-dev',
   mode: 'development',
-  devtool: 'eval',
+  devtool: 'inline-source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-
   entry: {
-    app: ['./client'],
+    app: './client',
   },
   module: {
     rules: [
       {
-        test: /\.jsx?/,
+        test: /\.jsx?$/,
         loader: 'babel-loader',
         options: {
           presets: [
             [
               '@babel/preset-env',
               {
-                targets: {
-                  browsers: ['> 1% in KR'], // browserslist
-                },
+                targets: { browsers: ['last 2 chrome versions'] },
                 debug: true,
               },
             ],
             '@babel/preset-react',
           ],
           plugins: [
-            '@babel/plugin-proposal-class-properties',
             'react-refresh/babel',
+            '@babel/plugin-proposal-class-properties',
           ],
         },
+        exclude: path.join(__dirname, 'node_modules'),
       },
     ],
   },
-  plugins: [
-    new webpack.LoaderOptionsPlugin({ debug: true }),
-    new RefreshWebpackPlugin(),
-  ],
+  plugins: [new ReactRefreshWebpackPlugin()],
   output: {
-    path: path.join(__dirname, 'dist'), // 실제 경로
-    filename: 'app.js',
-    publicPath: '/dist/', // 가상 경로
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].js',
+    publicPath: '/dist',
   },
   devServer: {
+    // react router: 설정된 URL 외의 경로로 접근한 경우(refresh, 직접 입력) 404 responses : 서버 이슈 => historyApiFallback 옵션 활성화로 해결 가능
     historyApiFallback: true,
-    publicPath: '/dist/',
+    publicPath: '/dist',
     hot: true,
   },
 };
